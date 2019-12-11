@@ -79,12 +79,12 @@
         (dateClick)="dateClick($event)" (eventDragStop)="eventDragStop($event)" [plugins]="options.plugins"
         (eventClick)="eventClick($event)"></full-calendar>
 
-      <ul *ngFor="let data of clientBookings">
+      <!-- <ul *ngFor="let data of clientBookings">
         <li>Client ID : {{data.clientId}} </li>
         <li>Client Name : {{data.clientName}} </li>
-        <li>Created Date: {{ data.createdDate | date}}</li>
+        <li>Created Date: {{ data.client.createdDate | date}}</li>
         <li>Email: {{ data.email}}</li>
-      </ul>
+      </ul> -->
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
