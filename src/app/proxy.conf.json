@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+      "target": "http://nammoffice-env.3fanyydypu.us-east-2.elasticbeanstalk.com/",
+      "pathRewrite": {"^/api" : ""},
+      "secure": false,
+      "changeOrigin": true
+    }
+}

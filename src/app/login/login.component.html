@@ -1,0 +1,45 @@
+<div class="flex-container">
+  <div>
+    <mat-icon class="bannerIcon">account_circle</mat-icon>
+  </div>
+</div>
+<mat-card>
+  <form #loginForm ='ngForm' (ngSubmit)='loginSuccuss(loginForm.value)'>
+    <br>
+    <mat-form-field class="input">
+      <mat-label>
+        <mat-icon>email</mat-icon> Email
+      </mat-label>
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" name="email" ngModel>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <mat-form-field class="input">
+      <mat-label>
+        <mat-icon>lock</mat-icon> Password
+      </mat-label>
+      <input matInput matTooltip="Password Should be Min 8 Char and must have Atleast 1 Upper and Lower case, 1 Number and 1 Special character"
+        type="password" [formControl]="passwordFormControl" [errorStateMatcher]="matcher" name="password" ngModel>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('pattern')">
+        Invalid Password
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+  <a class="pull-right" routerLink="forgot" routerLinkActive="active" (click)="navForgot()">Forgot Password?</a>
+  <br>
+  <br>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" class="button" (click)="loginSuccuss()">Sign In</button>
+  </div>
+
+</mat-card>

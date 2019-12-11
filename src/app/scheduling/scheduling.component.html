@@ -1,0 +1,90 @@
+<mat-toolbar>
+  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <img src="../../assets/images/calander.jpg" alt="calender" id="calender">
+  <span id="name">Calender</span>
+  <span class="example-spacer"></span>
+  <!-- <button mat-raised-button mwlCalendarToday [(viewDate)]="viewDate">Today</button>
+  <button mat-icon-button aria-label="Example icon-button with a heart icon" mwlCalendarPreviousView [view]="view"
+    [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Example icon-button with a heart icon" mwlCalendarNextView [view]="view"
+    [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button> -->
+  <span class="example-spacer"></span>
+  <h4 id="title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h4>
+  <span class="example-spacer"></span>
+  <mat-form-field>
+    <mat-label>Select Room</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option *ngFor="let room of roomList" value="option1">{{ room.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- <mat-form-field class="example-full-width">
+    <input type="text" matInput>
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field> -->
+
+  <!-- <button id="viewList" mat-button [matMenuTriggerFor]="calenderView">Select View</button>
+  <mat-menu #calenderView="matMenu">
+    <button mat-menu-item (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">Month</button>
+    <button mat-menu-item (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">Week</button>
+    <button mat-menu-item (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">Day</button>
+  </mat-menu> -->
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [mode]="(isHandset$ | async) ? 'push' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar><button mat-raised-button id="createButton" (click)="openDialog()">
+        <svg width="36" height="36" viewBox="0 0 36 36">
+          <path fill="#34A853" d="M16 16v14h4V20z"></path>
+          <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+          <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+          <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+          <path fill="none" d="M0 0h36v36H0z"></path>
+        </svg>
+        Create
+      </button></mat-toolbar>
+
+    <div class="container1" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <div fxFlex="20%">
+        <mat-card>
+          <mat-calendar [selected]="selectedDate" (selectedChange)="onSelect($event)"></mat-calendar>
+        </mat-card>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- <div [ngSwitch]="view">
+      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+        (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-day-view>
+    </div> -->
+    <div class="control-section">
+      <!-- <ejs-schedule width='100%' height='650px' [eventSettings]="eventSettings" [currentView]="currentView">
+      </ejs-schedule> -->
+      <full-calendar *ngIf="options" #fullcalendar [editable]="true" [events]="myObjStr" [header]="options.header"
+        (dateClick)="dateClick($event)" (eventDragStop)="eventDragStop($event)" [plugins]="options.plugins"
+        (eventClick)="eventClick($event)"></full-calendar>
+
+      <ul *ngFor="let data of clientBookings">
+        <li>Client ID : {{data.clientId}} </li>
+        <li>Client Name : {{data.clientName}} </li>
+        <li>Created Date: {{ data.createdDate | date}}</li>
+        <li>Email: {{ data.email}}</li>
+      </ul>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
