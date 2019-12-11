@@ -127,6 +127,10 @@ gelLocation(){
     this.snackBar.open( "Booked" );
   }
 
+  refresh(): void {
+    window.location.reload();
+}
+
   //  bookingList
   createBooking = {
     "clientId": "",
@@ -161,7 +165,8 @@ gelLocation(){
       let req = data.json();
       console.log(req);  
       this.hideModel();   
-      this.openSnackBar();              
+      this.openSnackBar();     
+      this.refresh();
     }) 
 
   }
