@@ -35,7 +35,18 @@ mat-toolbar{
   height:40px;
 }
 
+.mat-raised-button{
+  font-size: 20px;
+  color:white;
+  background-color: green;
+  font-weight: bold;
+}
 
+.mat-toolbar span#name{
+  color: blue;
+  font-size: 25px;
+  font-weight: bold;
+}
 
 /* Mobile Screen CSS*/
 @media screen and (max-width: 600px) {

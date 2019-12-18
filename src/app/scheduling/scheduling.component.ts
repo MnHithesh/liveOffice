@@ -140,12 +140,9 @@ ngOnInit() {
  displaydata(data) {
   this.httpdata = data;
 
-  console.log("Hello " + this.httpdata);
-
-
   for(let i of this.httpdata){
     this.myObj.push({start: i.bookingDate.substring(0, 10),
-    title: i.email });
+    title: "Client : " + i.email.substr(0, i.email.indexOf('@'))+ "\n" + "Start Time" + " : " +(i.startTime.substring(11, 19)) + "\n" + "End Time" + " : " +(i.endTime.substring(11, 19))});
   }
   this.myObjStr = JSON.parse(JSON.stringify(this.myObj));
   console.log("**************************************************************");

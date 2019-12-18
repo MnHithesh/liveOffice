@@ -41,7 +41,7 @@
       <div class="col-sm-6">
         <label class="font-weight-bold">Start date</label>
           <input type="date" name="bookingDate" max="3000-12-31" 
-               min="1000-01-01" class="form-control" ngModel required>
+               min="date()" class="form-control" ngModel required>
       </div>
       <div class="col-sm-3">
               <label class="font-weight-bold">Start Time</label>
@@ -70,7 +70,7 @@
 
       <div class="col-sm-10">
           <div class="form-group">
-              <label class="font-weight-bold">Add Guest</label><br>
+              <label class="font-weight-bold">Guest</label><br>
               <select id="email" name="email" class="form-control" required ngModel>
                   <option *ngFor="let guest of guestList" [ngValue]="guest.email">{{guest.email}}</option>
               </select>
@@ -106,7 +106,7 @@
     </div>
     <div class="col-sm-10">
         <div class="form-group">
-            <label class="font-weight-bold">Add Location</label><br>
+            <label class="font-weight-bold">Location</label><br>
             <select id="location" name="locationId" class="form-control" required ngModel>
                 <option *ngFor="let loc of locationList" [ngValue]="loc.locationId">{{loc.locationName}}</option>
             </select>
@@ -131,7 +131,7 @@
       </div>
       <div class="col-sm-10">
           <div class="form-group">
-              <label class="font-weight-bold">Add Resource</label><br>
+              <label class="font-weight-bold">Resource</label><br>
               <select id="location" name="resourceId" class="form-control" required ngModel>
                   <option *ngFor="let room of roomList" [ngValue]="room.resourceId">{{room.name}}</option>
               </select>
