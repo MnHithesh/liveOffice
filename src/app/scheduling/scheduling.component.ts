@@ -95,7 +95,7 @@ export class SchedulingComponent implements OnInit {
   //Dailog of Create Button
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateEventComponent,{
-       width: '550px',
+       width: '600px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

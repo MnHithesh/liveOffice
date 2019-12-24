@@ -28,4 +28,13 @@ export class ResourceService {
       return res;
     })
   }
+
+  public getByLocation(locationId){
+    let Url = this.BaseURL + "location/"+locationId+"/allResources";
+    return this.http.get(Url,{ headers: this.headers}).map(data => {
+      let res = data;
+      console.log(res);
+      return res;
+    })
+  }
 }

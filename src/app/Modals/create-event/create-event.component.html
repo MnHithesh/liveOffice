@@ -38,10 +38,16 @@
         <input matInput [matDatepicker]="picker" [hidden] ngModal name="startDate" (change)="selectDate()" >
         <mat-datepicker #picker></mat-datepicker>
       </div> -->
+      <br>
       <div class="col-sm-6">
-        <label class="font-weight-bold">Start date</label>
+        <!-- <label class="font-weight-bold">Start date</label>
           <input type="date" name="bookingDate" max="3000-12-31" 
-               min="date()" class="form-control" ngModel required>
+               min="date()" class="form-control" ngModel required> -->
+               <mat-form-field>
+                <input matInput [matDatepicker]="picker3" placeholder="Choose Date" name="bookingDate" [value]="today.value" ngModel required>
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+              </mat-form-field>
       </div>
       <div class="col-sm-3">
               <label class="font-weight-bold">Start Time</label>
@@ -71,9 +77,10 @@
       <div class="col-sm-10">
           <div class="form-group">
               <label class="font-weight-bold">Guest</label><br>
-              <select id="email" name="email" class="form-control" required ngModel>
+              <input id="email" name="email" class="form-control" required ngModel>
+              <!-- <select id="email" name="email" class="form-control" required ngModel>
                   <option *ngFor="let guest of guestList" [ngValue]="guest.email">{{guest.email}}</option>
-              </select>
+              </select> -->
           </div>
           <!-- <mat-form-field class="example-full-width">
               <input type="text" placeholder="Pick Guest" aria-label="Number"  matInput [formControl]="myControl" [matAutocomplete]="guest">
@@ -107,8 +114,8 @@
     <div class="col-sm-10">
         <div class="form-group">
             <label class="font-weight-bold">Location</label><br>
-            <select id="location" name="locationId" class="form-control" required ngModel>
-                <option *ngFor="let loc of locationList" [ngValue]="loc.locationId">{{loc.locationName}}</option>
+            <select id="location" #cata="ngModel" [compareWith]="compareFn" name="locationId" class="form-control" required ngModel (ngModelChange)="catagory(cata.value)">
+                <option *ngFor="let loc of locationList" [ngValue]="loc.locationId" (change)="getResourceByLocation(loc.locationId)">{{loc.locationName}}</option>
             </select>
         </div>
         <!-- <mat-form-field class="example-full-width">

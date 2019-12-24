@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AlertPromise } from 'selenium-webdriver';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {FormControl} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
@@ -29,6 +30,8 @@ export class CreateEventComponent implements OnInit {
   public locationList: {};
   public guestList: {};
   private roomList: {};
+
+  public today = new FormControl(new Date());
 
   durationInSeconds = 5;
 
@@ -89,39 +92,17 @@ export class CreateEventComponent implements OnInit {
   }
 
 
-  //get location details to location autocomplite
-getBookingLocation(){
-  this.booking.getAllLocations().subscribe((data)=>{
-    let res : any = data;
-    this.BookinglocationList = JSON.parse(res._body);
-    console.log(this.locationList);
-  })
-}
-// get all clients
-getClients(){
-  this.client.getAllClients().subscribe((data)=>{
-    let res : any = data;
-    this.guestList = JSON.parse(res._body);
-    console.log(this.guestList);
-  })
-}
-// get  all location
+
+
+// get  all location by client Id
 gelLocation(){
-  this.location.getAllLocation().subscribe((data)=>{
-    let res : any = data;
+  this.location.getLocationByClient().subscribe((data)=>{
+    let res:any = data;
     this.locationList = JSON.parse(res._body);
-    console.log(this.locationList);
+    console.log(this.locationList)
   })
 }
 
-  // getall rooms List
-  getAllResource(){
-    this.resource.getAll().subscribe((data)=>{
-       let res:any = data;
-       this.roomList = JSON.parse(res._body);
-       console.log(this.roomList)
-    })
-   }
 
    openSnackBar() {
     this.snackBar.open( "Booked" );
@@ -153,7 +134,10 @@ gelLocation(){
     this.createBooking.locationId = data.locationId;
     this.createBooking.resourceId = data.resourceId;
     this.createBooking.email = data.email;
-    this.createBooking.bookingDate = data.bookingDate;
+    let hithesh = this.datePipe.transform(data.bookingDate, 'yyyy-MM-dd');
+    console.log("hithesh"+ hithesh);
+    this.createBooking.bookingDate = hithesh+"T22:"+data.startTime;
+    console.log(this.createBooking.bookingDate);
     this.createBooking.startTime = data.bookingDate+"T22:"+data.startTime;
     this.createBooking.endTime = data.bookingDate+"T22:"+data.endTime;
     this.createBooking.alert = "N";
@@ -168,17 +152,23 @@ gelLocation(){
       this.openSnackBar();     
       this.refresh();
     }) 
-
   }
-   
+
+
+  // get resource based on location id
+  catagory(selectedItem) {
+    console.log("featching details of "+selectedItem);
+    this.resource.getByLocation(selectedItem).subscribe((data)=>{
+      let res:any = data;
+      this.roomList = JSON.parse(res._body);
+      console.log(this.roomList)
+    })
+  }
 
   ngOnInit() {
     this.date();
     this.selectDate();
-    this.getBookingLocation();
-    this.getClients();
     this.gelLocation();
-    this.getAllResource();
   }
 
 }

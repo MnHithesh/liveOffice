@@ -28,4 +28,14 @@ export class LocationService {
       return res;
     })
   }
+
+  getLocationByClient(){
+    let cId = localStorage.getItem('clientid');
+    let URL = this.localUrl+"get/"+cId;
+    return this.http.get(URL,{ headers: this.headers }).map(data =>{
+      let res = data;
+      console.log(res);
+      return res;
+    })
+  }
 }

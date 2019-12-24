@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -86,7 +87,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     // FullCalendarModule,
   ],
   entryComponents: [CreateEventComponent],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
